@@ -93,6 +93,7 @@ def make_data(N, num_landmarks, world_size, measurement_range, motion_noise,
             data.append([Z, [dx, dy]])
 
         # we are done when all landmarks were observed; otherwise re-run
+        #print (sum(seen), num_landmarks )
         complete = (sum(seen) == num_landmarks)
 
     print(' ')

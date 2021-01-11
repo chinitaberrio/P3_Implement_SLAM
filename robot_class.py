@@ -1,6 +1,5 @@
 from math import *
 import random
-import math
 
 
 ### ------------------------------------- ###
@@ -66,8 +65,6 @@ class robot:
     #        landmarks to be visible at all times
     #
     
-    ## TODO: paste your complete the sense function, here
-    ## make sure the indentation of the code is correct
     def sense(self):
         ''' This function does not take in any parameters, instead it references internal variables
             (such as self.landamrks) to measure the distance between the robot and any landmarks
@@ -79,28 +76,21 @@ class robot:
             '''
            
         measurements = []
-        index = 0
         
         ## TODO: iterate through all of the landmarks in a world
         
         ## TODO: For each landmark
         ## 1. compute dx and dy, the distances between the robot and the landmark
         ## 2. account for measurement noise by *adding* a noise component to dx and dy
-        ##    - The noise component should be a random value between [-1.0, 1.0)*measurement_noise
-        ##    - Feel free to use the function self.rand() to help calculate this noise component
-        ## 3. If either of the distances, dx or dy, fall outside of the internal var, measurement_range
-        ##    then we cannot record them; if they do fall in the range, then add them to the measurements list
-        ##    as list.append([index, dx, dy]), this format is important for data creation done later
+      
         
         ## TODO: return the final, complete list of measurements
-        
-        for landmark in self.landmarks:
+        for i, landmark in enumerate(self.landmarks):
             dx = landmark[0] - self.x + self.rand() * self.measurement_noise
             dy = landmark[1] - self.y + self.rand() * self.measurement_noise
-            radious =  math.sqrt(dx*dx + dy*dy)
-            if radious <= self.measurement_range or self.measurement_range == -1:
-                measurements.append([index, dx, dy])
-          
+            # checking if measurement in range
+            if abs(dx) <= self.measurement_range and abs(dy) <= self.measurement_range:
+                measurements.append([i,dx,dy])
         return measurements
 
 
