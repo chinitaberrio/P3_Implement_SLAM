@@ -1,5 +1,6 @@
 from math import *
 import random
+import math
 
 
 ### ------------------------------------- ###
@@ -78,6 +79,7 @@ class robot:
             '''
            
         measurements = []
+        index = 0
         
         ## TODO: iterate through all of the landmarks in a world
         
@@ -91,6 +93,14 @@ class robot:
         ##    as list.append([index, dx, dy]), this format is important for data creation done later
         
         ## TODO: return the final, complete list of measurements
+        
+        for landmark in self.landmarks:
+            dx = landmark[0] - self.x + self.rand() * self.measurement_noise
+            dy = landmark[1] - self.y + self.rand() * self.measurement_noise
+            radious =  math.sqrt(dx*dx + dy*dy)
+            if radious <= self.measurement_range or self.measurement_range == -1:
+                measurements.append([index, dx, dy])
+          
         return measurements
 
 
